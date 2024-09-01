@@ -1,31 +1,48 @@
 # Graph Algorithms (Classes and Namespaces)
 
-This project involves creating a class representing a graph and implementing various algorithms on the graphs.
+This project provides a C++ implementation of a `Graph` class and various algorithms for graph analysis. The `Graph` class represents a graph using an adjacency matrix, and the algorithms perform different operations such as connectivity checks, shortest path calculations, and cycle detection.
 
-### Graph.cpp
+## Files
 
-Contains the `Graph` class that represents a graph. The class includes the following methods:
+### `Graph.cpp`
 
-- `loadGraph`: Accepts an adjacency matrix and loads it into the graph.
-- `printGraph`: Prints the graph representation (format of your choice).
+Contains the implementation of the `Graph` class, which includes:
 
-### Algorithms.cpp
+- **`Graph()`**: Default constructor.
+- **`Graph(const std::vector<std::vector<int>> &matrix)`**: Constructor that initializes the graph with an adjacency matrix.
+- **`void loadGraph(const std::vector<std::vector<int>> &adjMatrix)`**: Loads an adjacency matrix into the graph.
+- **`void printGraph() const`**: Prints the graph in a readable format.
+- **`const std::vector<std::vector<int>> &getMatrix() const`**: Returns the adjacency matrix of the graph.
+- **`size_t graphSize() const`**: Returns the size (number of vertices) of the graph.
+- **`size_t countEdges() const`**: Returns the number of edges in the graph.
+- **`bool checkValid(const Graph &secGraph) const`**: Checks if another graph has the same size.
+- **`Graph operator+(const Graph &secGraph) const`**: Adds two graphs.
+- **`Graph operator-(const Graph &secGraph) const`**: Subtracts one graph from another.
+- **`Graph operator*(const Graph &secGraph) const`**: Multiplies two graphs.
+- **`Graph operator*(int scalar) const`**: Multiplies the graph by a scalar.
+- **`bool operator==(const Graph &secGraph) const`**: Compares two graphs for equality.
+- **`bool operator!=(const Graph &secGraph) const`**: Compares two graphs for inequality.
+- **`bool operator<(const Graph &secGraph) const`**: Compares two graphs based on the number of edges.
+- **`bool operator>(const Graph &secGraph) const`**: Compares two graphs based on the number of edges.
+- **`std::ostream &operator<<(std::ostream &out, const Graph &g)`**: Outputs the graph to a stream.
 
-Contains implementations of graph algorithms. The algorithms include:
+### `Algorithms.cpp`
 
-- `isConnected(g)`: Receives a graph and returns `1` if the graph is connected (otherwise returns `0`).
-- `shortestPath(g, start, end)`: Receives a graph, a start vertex, and an end vertex, and returns the shortest path between the two vertices. If there is no such path, returns `-1`.
-- `isContainsCycle(g)`: Receives a graph and prints any cycle found. If no cycle exists, returns `0`.
-- `isBipartite(g)`: Receives a graph and returns the bipartite division of the graph. If the graph cannot be divided, returns `0`.
-- `negativeCycle(g)`: Receives a graph and finds a negative cycle (i.e., a cycle with a negative sum of edge weights). If no such cycle exists, prints that no negative cycle exists.
+Contains the implementation of various graph algorithms:
 
-### Demo.cpp
+- **`int isConnected(const Graph &g)`**: Checks if the graph is connected and returns `1` if true, `0` otherwise.
+- **`std::string shortestPath(const Graph &g, int start, int end)`**: Finds the shortest path between two vertices.
+- **`int isContainsCycle(const Graph &g)`**: Checks if the graph contains a cycle and prints any cycle found.
+- **`int isBipartite(const Graph &g)`**: Checks if the graph is bipartite and returns the bipartite division if possible.
+- **`void negativeCycle(const Graph &g)`**: Finds a negative cycle in the graph, if one exists.
 
-Contains examples of inputs and outputs.
+### `Demo.cpp`
 
-### Code Example
+Provides examples of how to use the `Graph` class and the algorithms. It includes sample input matrices and demonstrates the functionality of various methods and algorithms.
 
-Here is a small example of how to use the classes and algorithms:
+## Code Example
+
+Here is a small example demonstrating how to use the `Graph` class and the provided algorithms:
 
 ```cpp
 #include "Graph.hpp"
@@ -59,11 +76,6 @@ int main() {
     } else {
         std::cout << "The graph does not contain a cycle." << std::endl;
     }
-
-    std::string bipartite = ariel::Algorithms::isBipartite(graph);
-    std::cout << "Bipartite sets: " << bipartite << std::endl;
-
-    ariel::Algorithms::negativeCycle(graph);
 
     return 0;
 }
